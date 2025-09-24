@@ -157,3 +157,165 @@ export default function HeroSlider() {
     </div>
   );
 }
+
+// "use client";
+
+// import { useState } from "react";
+// import { motion } from "framer-motion";
+// import Image from "next/image";
+// import NavBar from "./NavBar";
+
+// const slides = [
+//   {
+//     id: 1,
+//     layout: "split", // text left, image right
+//     title: "Eros augue curabitur rutrum ibrium",
+//     desc: "Connection resizing strikethrough frame project layer opacity. Rotate flatten slight link invite plugin.",
+//     img: "/shoe1.png",
+//     // bg: "bg-white",
+//     dark: false,
+//   },
+//   {
+//     id: 2,
+//     layout: "full-image", // full bg red with shoe
+//     img: "/shoe2.png",
+//     // bg: "bg-red-600",
+//     dark: true,
+//   },
+//   {
+//     id: 3,
+//     layout: "center", // center shoe
+//     img: "/shoe3.png",
+//     bg: "bg-gradient-to-r from-red-600 to-white",
+//     dark: true,
+//   },
+//   {
+//     id: 4,
+//     layout: "full-image",
+//     img: "/shoe4.png",
+//     // bg: "bg-green-200",
+//     dark: false,
+//   },
+//   {
+//     id: 5,
+//     layout: "image-bottom-text", // image top, text bottom
+//     title: "Eros augue curabitur rutrum neque congue",
+//     desc: "Natural photo background with bottom text.",
+//     img: "/shoe5.png",
+//     // bg: "bg-sky-200",
+//     dark: false,
+//   },
+//   {
+//     id: 6,
+//     layout: "image-left-text-right", // image left, text right
+//     title: "Eros augue curabitur rutrum neque congue",
+//     desc: "Sky background with right text block.",
+//     img: "/shoe6.png",
+//     // bg: "bg-sky-300",
+//     dark: false,
+//   },
+// ];
+
+// export default function HeroSlider() {
+//   const [index, setIndex] = useState(0);
+
+//   const nextSlide = () => {
+//     setIndex((prev) => (prev + 1) % slides.length);
+//   };
+
+//   const slide = slides[index];
+
+//   return (
+//     <div
+//       className="relative w-full h-screen overflow-hidden"
+//       onClick={nextSlide}
+//     >
+//       <NavBar darkBackground={slide.dark} />
+
+//       <motion.div
+//         key={slide.id}
+//         className={`absolute inset-0 flex items-center justify-center ${slide.bg}`}
+//         initial={{ x: "100%", opacity: 0 }}
+//         animate={{ x: 0, opacity: 1 }}
+//         exit={{ x: "-100%", opacity: 0 }}
+//         transition={{ duration: 0.8, ease: "easeInOut" }}
+//       >
+//         {slide.layout === "split" && (
+//           <div className="flex w-full h-full">
+//             <div className="w-1/2 flex flex-col justify-center p-12 bg-white">
+//               <h2 className="text-4xl font-bold mb-4">{slide.title}</h2>
+//               <p className="text-gray-600">{slide.desc}</p>
+//             </div>
+//             <div className="w-1/2 flex items-center justify-center">
+//               <Image
+//                 src={slide.img}
+//                 alt="product"
+//                 width={600}
+//                 height={600}
+//                 priority
+//               />
+//             </div>
+//           </div>
+//         )}
+
+//         {slide.layout === "full-image" && (
+//           <Image
+//             src={slide.img}
+//             alt="product"
+//             fill
+//             className="object-cover"
+//             priority
+//           />
+//         )}
+
+//         {slide.layout === "center" && (
+//           <div className="flex items-center justify-center w-full h-full">
+//             <Image
+//               src={slide.img}
+//               alt="product"
+//               width={600}
+//               height={600}
+//               priority
+//             />
+//           </div>
+//         )}
+
+//         {slide.layout === "image-bottom-text" && (
+//           <div className="flex flex-col w-full h-full">
+//             <div className="flex-1 flex items-center justify-center">
+//               <Image
+//                 src={slide.img}
+//                 alt="product"
+//                 width={600}
+//                 height={600}
+//                 priority
+//               />
+//             </div>
+//             <div className="p-12 bg-white">
+//               <h2 className="text-3xl font-bold mb-4">{slide.title}</h2>
+//               <p className="text-gray-600">{slide.desc}</p>
+//             </div>
+//           </div>
+//         )}
+
+//         {slide.layout === "image-left-text-right" && (
+//           <div className="flex w-full h-full">
+//             <div className="w-2/3 flex items-center justify-center">
+//               <Image
+//                 src={slide.img}
+//                 alt="product"
+//                 width={800}
+//                 height={800}
+//                 priority
+//               />
+//             </div>
+//             <div className="w-1/3 flex flex-col justify-center p-12 bg-white">
+//               <h2 className="text-3xl font-bold mb-4">{slide.title}</h2>
+//               <p className="text-gray-600">{slide.desc}</p>
+//             </div>
+//           </div>
+//         )}
+//       </motion.div>
+//     </div>
+//   );
+// }

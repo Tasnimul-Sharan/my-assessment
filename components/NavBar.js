@@ -6,7 +6,6 @@ import Image from "next/image";
 export default function NavBar({ darkBackground }) {
   return (
     <nav className="fixed top-0 left-0 w-full z-50 bg-transparent px-8 py-4 flex justify-between items-center">
-      {/* Logo */}
       <motion.div
         key={darkBackground ? "white" : "black"}
         initial={{ opacity: 0 }}
@@ -14,15 +13,15 @@ export default function NavBar({ darkBackground }) {
         transition={{ duration: 0.6 }}
       >
         <Image
-          src={darkBackground ? "/logo.svg" : "/logo.svg"}
+          src="/logo.svg"
           alt="Logo"
           width={120}
           height={40}
           priority
+          className={darkBackground ? "invert" : ""}
         />
       </motion.div>
 
-      {/* Menu Icon */}
       <motion.div
         key={darkBackground ? "menu-white" : "menu-black"}
         initial={{ opacity: 0 }}

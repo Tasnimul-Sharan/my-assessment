@@ -1,111 +1,54 @@
-// "use client";
-
-// import { useState } from "react";
-// import { motion, AnimatePresence } from "framer-motion";
-// import Image from "next/image";
-
-// const slides = [
-//   {
-//     id: 1,
-//     title: "Eros augue curabitur rutrum ibrium",
-//     desc: "Connection resizing strikethrough frame project layer opacity. Rotate flatten slight link invite plugin.",
-//     img: "/shoe1.png",
-//     bg: "bg-white",
-//   },
-//   {
-//     id: 2,
-//     title: "Nunc vel risus commodo viverra",
-//     desc: "Clip asset ellipse flatten hand align editor flatten. Device star union frame text vector.",
-//     img: "/shoe2.png",
-//     bg: "bg-red-600",
-//   },
-//   {
-//     id: 3,
-//     title: "Pellentesque habitant morbi",
-//     desc: "Select rectangle style select scrolling bold boolean. Resize flatten opacity layer frame.",
-//     img: "/shoe3.png",
-//     bg: "bg-blue-500",
-//   },
-// ];
-
-// export default function HeroSlider() {
-//   const [index, setIndex] = useState(0);
-
-//   const nextSlide = () => {
-//     setIndex((prev) => (prev + 1) % slides.length);
-//   };
-
-//   return (
-//     <div
-//       className="relative w-full h-screen overflow-hidden cursor-pointer"
-//       onClick={nextSlide}
-//     >
-//       <AnimatePresence mode="wait">
-//         <motion.div
-//           key={slides[index].id}
-//           className="absolute inset-0 flex"
-//           initial={{ x: "100%", opacity: 0 }}
-//           animate={{ x: 0, opacity: 1 }}
-//           exit={{ x: "-100%", opacity: 0 }}
-//           transition={{ duration: 0.8, ease: "easeInOut" }}
-//         >
-//           {/* Left column */}
-//           <div className="w-1/2 flex flex-col justify-center p-12 bg-white">
-//             <h2 className="text-4xl font-bold mb-4">{slides[index].title}</h2>
-//             <p className="text-gray-600">{slides[index].desc}</p>
-//           </div>
-
-//           {/* Right column */}
-//           <div
-//             className={`w-full flex items-center justify-center ${slides[index].bg}`}
-//           >
-//             <Image
-//               src={slides[index].img}
-//               alt="product"
-//               width={1200}
-//               height={800}
-//               priority
-//               className="object-cover width-full h-full"
-//             />
-//           </div>
-//         </motion.div>
-//       </AnimatePresence>
-//     </div>
-//   );
-// }
-
 "use client";
 
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import NavBar from "./NavBar";
-// import NavBar from "./NavBar"; // import navbar
 
 const slides = [
   {
     id: 1,
+    type: "split",
     title: "Eros augue curabitur rutrum ibrium",
-    desc: "Connection resizing strikethrough frame project layer opacity. Rotate flatten slight link invite plugin.",
+    desc: "Connection resizing strikethrough frame project layer opacity.",
     img: "/shoe1.png",
-    bg: "bg-white",
-    dark: false, // light bg → black logo/menu
+    dark: true,
   },
   {
     id: 2,
-    title: "Nunc vel risus commodo viverra",
-    desc: "Clip asset ellipse flatten hand align editor flatten. Device star union frame text vector.",
-    img: "/shoe2.png",
-    bg: "bg-red-600",
-    dark: true, // dark bg → white logo/menu
+    type: "middle",
+    img: "/shoe1.png",
+    rightImg: "/shoe3.png",
+    dark: false,
   },
   {
     id: 3,
-    title: "Pellentesque habitant morbi",
-    desc: "Select rectangle style select scrolling bold boolean. Resize flatten opacity layer frame.",
-    img: "/shoe3.png",
-    bg: "bg-blue-500",
-    dark: true, // dark bg → white logo/menu
+    type: "triple",
+    img: "/shoe2.png",
+    leftImg: "/shoe1.png",
+    rightImg: "/shoe3.png",
+    dark: false,
+  },
+  {
+    id: 4,
+    type: "split-percent",
+    imgLeft: "/shoe3.png",
+    imgRight: "/shoe4.png",
+    dark: false,
+  },
+  {
+    id: 5,
+    type: "full",
+    img: "/shoe4.png",
+    dark: false,
+  },
+  {
+    id: 6,
+    type: "bottom-text",
+    img: "/shoe4.png",
+    title: "Eros augue curabitur eu rutrum neque congue",
+    desc: "Connection reesizing strikethrough frame project layer opacity. Rotate flatten align link invite plugin. Clip asset ellipse flatten hand align editor flatten. Device star union frame text vector. Select rectangle style select scrolling bold boolean.",
+    dark: true,
   },
 ];
 
@@ -116,206 +59,150 @@ export default function HeroSlider() {
     setIndex((prev) => (prev + 1) % slides.length);
   };
 
+  const slide = slides[index];
+
   return (
     <div
       className="relative w-full h-screen overflow-hidden cursor-pointer"
       onClick={nextSlide}
     >
-      {/* Navbar - dynamic darkBackground */}
-      <NavBar darkBackground={slides[index].dark} />
+      <NavBar darkBackground={slide.dark} />
 
       <AnimatePresence mode="wait">
         <motion.div
-          key={slides[index].id}
+          key={slide.id}
           className="absolute inset-0 flex"
-          initial={{ x: "100%", opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: "-100%", opacity: 0 }}
+          initial={{ x: "100%" }}
+          animate={{ x: 0 }}
+          exit={{ x: "-100%" }}
           transition={{ duration: 0.8, ease: "easeInOut" }}
         >
-          {/* Left column */}
-          <div className="w-1/2 flex flex-col justify-center p-12 bg-white">
-            <h2 className="text-4xl font-bold mb-4">{slides[index].title}</h2>
-            <p className="text-gray-600">{slides[index].desc}</p>
-          </div>
+          {slide.type === "split" && (
+            <>
+              <div className="w-1/2 flex flex-col justify-center p-12 bg-white">
+                <h2 className="text-4xl font-bold mb-4 text-gray-800">
+                  {slide.title}
+                </h2>
+                <p className="text-gray-600">{slide.desc}</p>
+              </div>
+              <div className="w-full flex items-center justify-center">
+                <Image src={slide.img} alt="shoe" width={900} height={600} />
+              </div>
+            </>
+          )}
 
-          {/* Right column */}
-          <div
-            className={`w-full flex items-center justify-center ${slides[index].bg}`}
-          >
-            <Image
-              src={slides[index].img}
-              alt="product"
-              width={1200}
-              height={800}
-              priority
-              className="object-cover width-full h-full"
-            />
-          </div>
+          {slide.type === "middle" && (
+            <div className="relative w-full h-full flex items-center justify-center bg-white">
+              <Image
+                src={slide.leftImg}
+                alt="shoe left"
+                width={1200}
+                height={1200}
+                className="absolute left-0 opacity-50 object-contain"
+              />
+              <Image
+                src={slide.img}
+                alt="shoe center"
+                width={900}
+                height={600}
+                className="relative z-10 object-cover"
+              />
+              <Image
+                src={slide.rightImg}
+                alt="shoe right"
+                width={400}
+                height={300}
+                className="absolute right-0  object-cover"
+              />
+            </div>
+          )}
+          {slide.type === "triple" && (
+            <div className="flex items-center justify-between w-full h-full bg-white">
+              <Image
+                src={slide.leftImg}
+                alt="shoe left"
+                width={1200}
+                height={1200}
+                className="w-1/4 h-full object-cover"
+              />
+              <Image
+                src={slide.img}
+                alt="shoe center"
+                width={800}
+                height={500}
+                className="z-10"
+              />
+              <Image
+                src={slide.rightImg}
+                alt="shoe right"
+                width={1200}
+                height={1200}
+                className="w-1/4 h-full object-cover"
+              />
+            </div>
+          )}
+
+          {slide.type === "split-percent" && (
+            <div className="flex w-full h-full bg-gray-100">
+              <div className="w-1/5 flex items-center justify-center">
+                <Image
+                  src={slide.imgLeft}
+                  alt="shoe3"
+                  width={1200}
+                  height={1200}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+              <div className="w-4/5 flex items-center justify-center">
+                <Image
+                  src={slide.imgRight}
+                  alt="shoe4"
+                  width={900}
+                  height={600}
+                  className="object-cover w-full h-full"
+                />
+              </div>
+            </div>
+          )}
+
+          {slide.type === "full" && (
+            <div className="flex items-center justify-center w-full h-full bg-white">
+              <Image
+                src={slide.img}
+                alt="shoe full"
+                width={1200}
+                height={800}
+                className="object-cover w-full h-full"
+              />
+            </div>
+          )}
+
+          {slide.type === "bottom-text" && (
+            <div className="flex flex-col w-full h-full bg-white">
+              <div className="flex-1 flex items-center justify-center overflow-hidden">
+                <Image
+                  src={slide.img}
+                  alt="shoe4"
+                  width={900}
+                  height={600}
+                  className="object-cover w-full h-full transition-transform duration-700"
+                />
+              </div>
+              <div className="flex w-full bg-white p-12">
+                <div className="w-1/2"></div>
+                <div className="w-1/2">
+                  <h2 className="text-3xl font-bold text-gray-800">
+                    {slide.title}
+                  </h2>
+                  <p className="mt-4 text-gray-600 leading-relaxed">
+                    {slide.desc}
+                  </p>
+                </div>
+              </div>
+            </div>
+          )}
         </motion.div>
       </AnimatePresence>
     </div>
   );
 }
-
-// "use client";
-
-// import { useState } from "react";
-// import { motion } from "framer-motion";
-// import Image from "next/image";
-// import NavBar from "./NavBar";
-
-// const slides = [
-//   {
-//     id: 1,
-//     layout: "split", // text left, image right
-//     title: "Eros augue curabitur rutrum ibrium",
-//     desc: "Connection resizing strikethrough frame project layer opacity. Rotate flatten slight link invite plugin.",
-//     img: "/shoe1.png",
-//     // bg: "bg-white",
-//     dark: false,
-//   },
-//   {
-//     id: 2,
-//     layout: "full-image", // full bg red with shoe
-//     img: "/shoe2.png",
-//     // bg: "bg-red-600",
-//     dark: true,
-//   },
-//   {
-//     id: 3,
-//     layout: "center", // center shoe
-//     img: "/shoe3.png",
-//     bg: "bg-gradient-to-r from-red-600 to-white",
-//     dark: true,
-//   },
-//   {
-//     id: 4,
-//     layout: "full-image",
-//     img: "/shoe4.png",
-//     // bg: "bg-green-200",
-//     dark: false,
-//   },
-//   {
-//     id: 5,
-//     layout: "image-bottom-text", // image top, text bottom
-//     title: "Eros augue curabitur rutrum neque congue",
-//     desc: "Natural photo background with bottom text.",
-//     img: "/shoe5.png",
-//     // bg: "bg-sky-200",
-//     dark: false,
-//   },
-//   {
-//     id: 6,
-//     layout: "image-left-text-right", // image left, text right
-//     title: "Eros augue curabitur rutrum neque congue",
-//     desc: "Sky background with right text block.",
-//     img: "/shoe6.png",
-//     // bg: "bg-sky-300",
-//     dark: false,
-//   },
-// ];
-
-// export default function HeroSlider() {
-//   const [index, setIndex] = useState(0);
-
-//   const nextSlide = () => {
-//     setIndex((prev) => (prev + 1) % slides.length);
-//   };
-
-//   const slide = slides[index];
-
-//   return (
-//     <div
-//       className="relative w-full h-screen overflow-hidden"
-//       onClick={nextSlide}
-//     >
-//       <NavBar darkBackground={slide.dark} />
-
-//       <motion.div
-//         key={slide.id}
-//         className={`absolute inset-0 flex items-center justify-center ${slide.bg}`}
-//         initial={{ x: "100%", opacity: 0 }}
-//         animate={{ x: 0, opacity: 1 }}
-//         exit={{ x: "-100%", opacity: 0 }}
-//         transition={{ duration: 0.8, ease: "easeInOut" }}
-//       >
-//         {slide.layout === "split" && (
-//           <div className="flex w-full h-full">
-//             <div className="w-1/2 flex flex-col justify-center p-12 bg-white">
-//               <h2 className="text-4xl font-bold mb-4">{slide.title}</h2>
-//               <p className="text-gray-600">{slide.desc}</p>
-//             </div>
-//             <div className="w-1/2 flex items-center justify-center">
-//               <Image
-//                 src={slide.img}
-//                 alt="product"
-//                 width={600}
-//                 height={600}
-//                 priority
-//               />
-//             </div>
-//           </div>
-//         )}
-
-//         {slide.layout === "full-image" && (
-//           <Image
-//             src={slide.img}
-//             alt="product"
-//             fill
-//             className="object-cover"
-//             priority
-//           />
-//         )}
-
-//         {slide.layout === "center" && (
-//           <div className="flex items-center justify-center w-full h-full">
-//             <Image
-//               src={slide.img}
-//               alt="product"
-//               width={600}
-//               height={600}
-//               priority
-//             />
-//           </div>
-//         )}
-
-//         {slide.layout === "image-bottom-text" && (
-//           <div className="flex flex-col w-full h-full">
-//             <div className="flex-1 flex items-center justify-center">
-//               <Image
-//                 src={slide.img}
-//                 alt="product"
-//                 width={600}
-//                 height={600}
-//                 priority
-//               />
-//             </div>
-//             <div className="p-12 bg-white">
-//               <h2 className="text-3xl font-bold mb-4">{slide.title}</h2>
-//               <p className="text-gray-600">{slide.desc}</p>
-//             </div>
-//           </div>
-//         )}
-
-//         {slide.layout === "image-left-text-right" && (
-//           <div className="flex w-full h-full">
-//             <div className="w-2/3 flex items-center justify-center">
-//               <Image
-//                 src={slide.img}
-//                 alt="product"
-//                 width={800}
-//                 height={800}
-//                 priority
-//               />
-//             </div>
-//             <div className="w-1/3 flex flex-col justify-center p-12 bg-white">
-//               <h2 className="text-3xl font-bold mb-4">{slide.title}</h2>
-//               <p className="text-gray-600">{slide.desc}</p>
-//             </div>
-//           </div>
-//         )}
-//       </motion.div>
-//     </div>
-//   );
-// }

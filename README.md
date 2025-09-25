@@ -1,4 +1,4 @@
-# Figma → Production (Take-Home) — [Your Name]
+# Figma → Production (Take-Home) — Tasnimul Alam
 
 ## Live demo
 - Deployed URL: https://my-assessment-eight.vercel.app/
